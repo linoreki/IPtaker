@@ -1,38 +1,42 @@
 import requests
 
+
 def get_public_ip():
     """
-    Obtiene la dirección IP pública del equipo utilizando httpbin.org.
+    Gets the public IP address of the device using httpbin.org.
     """
     try:
-        response = requests.get('https://httpbin.org/ip')
+        response = requests.get("https://httpbin.org/ip")
         ip_data = response.json()
-        public_ip = ip_data.get('origin')
+        public_ip = ip_data.get("origin")
         return public_ip
     except Exception as e:
-        print(f"Error al obtener la IP pública: {e}")
+        print(f"Error fetching public IP: {e}")
         return None
+
 
 def save_ip_to_file(ip):
     """
-    Guarda la dirección IP pública en un archivo de texto.
+    Saves the public IP address to a text file.
     """
     try:
         with open("public_ip.txt", "w") as file:
             file.write(ip)
-        print(f"La IP pública ({ip}) se ha guardado en public_ip.txt")
+        print(f"Public IP ({ip}) has been saved to public_ip.txt")
     except Exception as e:
-        print(f"Error al guardar la IP pública: {e}")
+        print(f"Error saving public IP: {e}")
+
 
 def main():
-    # Obtiene la dirección IP pública
+    # Get the public IP address
     public_ip = get_public_ip()
 
     if public_ip:
-        # Guarda la dirección IP pública en un archivo de texto
+        # Save the public IP address to a text file
         save_ip_to_file(public_ip)
     else:
-        print("No se pudo obtener la IP pública.")
+        print("Could not retrieve public IP.")
+
 
 if __name__ == "__main__":
     main()

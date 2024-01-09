@@ -3,71 +3,76 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
+
 def get_public_ip():
     """
-    Obtiene la dirección IP pública del equipo utilizando httpbin.org.
+    Gets the public IP address of the device using httpbin.org.
     """
     try:
-        response = requests.get('https://httpbin.org/ip')
+        response = requests.get("https://httpbin.org/ip")
         ip_data = response.json()
-        public_ip = ip_data.get('origin')
+        public_ip = ip_data.get("origin")
         return public_ip
     except Exception as e:
-        print(f"Error al obtener la IP pública: {e}")
+        print(f"Error fetching public IP: {e}")
         return None
+
 
 def save_ip_to_file(ip):
     """
-    Guarda la dirección IP pública en un archivo de texto.
+    Saves the public IP address to a text file.
     """
     try:
         with open("public_ip.txt", "w") as file:
             file.write(ip)
-        print(f"La IP pública ({ip}) se ha guardado en public_ip.txt")
+        print(f"Public IP ({ip}) has been saved to public_ip.txt")
     except Exception as e:
-        print(f"Error al guardar la IP pública: {e}")
+        print(f"Error saving public IP: {e}")
+
 
 def send_email(subject, body):
     """
-    Envía un correo electrónico con la dirección IP pública.
+    Sends an email with the public IP address.
     """
     try:
-        sender_email = 'tucorreo@gmail.com'  # Tu dirección de correo electrónico
-        receiver_email = 'destinatario@gmail.com'  # La dirección de correo electrónico del destinatario
-        password = 'tucontraseña'  # Tu contraseña de correo electrónico
+        sender_email = "your_email@gmail.com"  # Your email address
+        receiver_email = "recipient@gmail.com"  # Recipient's email address
+        password = "your_password"  # Your email password
 
-        # Configura el mensaje
+        # Configure the message
         message = MIMEMultipart()
-        message['From'] = sender_email
-        message['To'] = receiver_email
-        message['Subject'] = subject
-        message.attach(MIMEText(body, 'plain'))
+        message["From"] = sender_email
+        message["To"] = receiver_email
+        message["Subject"] = subject
+        message.attach(MIMEText(body, "plain"))
 
-        # Conéctate al servidor SMTP y envía el correo electrónico
-        with smtplib.SMTP('smtp.gmail.com', 587) as server:
+        # Connect to the SMTP server and send the email
+        with smtplib.SMTP("smtp.gmail.com", 587) as server:
             server.starttls()
             server.login(sender_email, password)
             server.sendmail(sender_email, receiver_email, message.as_string())
-            
-        print("Correo electrónico enviado correctamente.")
-        
+
+        print("Email sent successfully.")
+
     except Exception as e:
-        print(f"Error al enviar el correo electrónico: {e}")
+        print(f"Error sending email: {e}")
+
 
 def main():
-    # Obtiene la dirección IP pública
+    # Get the public IP address
     public_ip = get_public_ip()
 
     if public_ip:
-        # Guarda la dirección IP pública en un archivo de texto
+        # Save the public IP address to a text file
         save_ip_to_file(public_ip)
 
-        # Envía la dirección IP pública por correo electrónico
-        subject = 'Dirección IP Pública'
-        body = f"La dirección IP pública actual es: {public_ip}"
+        # Send the public IP address via email
+        subject = "Public IP Address"
+        body = f"The current public IP address is: {public_ip}"
         send_email(subject, body)
     else:
-        print("No se pudo obtener la IP pública.")
+        print("Could not retrieve public IP.")
+
 
 if __name__ == "__main__":
     main()
