@@ -10,9 +10,6 @@ Asegúrate de tener el módulo requests instalado antes de ejecutar el script. P
 
 Nota: Este script requiere acceso a Internet para obtener la dirección IP pública.
 
-Esta descripción proporciona una breve explicación del propósito del script, cómo se utiliza y cualquier requisito necesario. Puedes personalizarla según las características específicas de tu proyecto. Además, es importante documentar cualquier dependencia o configuración necesaria para que otros usuarios puedan utilizar tu código sin problemas.
-
-
 
 
 
