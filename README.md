@@ -24,7 +24,7 @@ The IP Public Taker is a simple Python script that leverages the httpbin.org ser
 
 ## Requirements
 
-- Python 3.11
+- Python 3.x
 - `requests` module (install using `pip install requests`)
 
 ## Usage
