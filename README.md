@@ -1,4 +1,4 @@
-#Obtener y Guardar IP Pública
+Obtener y Guardar IP Pública
 Este script de Python utiliza el servicio web httpbin.org para obtener la dirección IP pública de la máquina en la que se ejecuta. La dirección IP pública se recupera mediante una solicitud HTTP al endpoint /ip de httpbin.org. Posteriormente, la dirección IP se guarda en un archivo de texto local llamado public_ip.txt.
 
 Uso
